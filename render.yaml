@@ -6,30 +6,31 @@ services:
       url: php:8.1-cli
     plan: free
 
-    preDeployCommand: |
+    buildCommand: |
       composer install --no-dev --optimize-autoloader
       php artisan key:generate
       php artisan migrate --force
       php artisan db:seed --force
 
-    startCommand: php artisan serve --host 0.0.0.0 --port 10000
+    startCommand: php artisan serve --host 0.0.0.0 --port $PORT
 
     envVars:
       - key: APP_ENV
-        value: local
+        value: production
       - key: APP_KEY
         generateValue: true
+
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
-        sync: false
+        value: ep-muddy-surf-a2iarhs8-pooler.eu-central-1.aws.neon.tech
       - key: DB_PORT
         value: "5432"
       - key: DB_DATABASE
-        sync: false
+        value: neondb
       - key: DB_USERNAME
-        sync: false
+        value: neondb_owner
       - key: DB_PASSWORD
-        sync: false
+        value: npg_2QgdriWAPO9o
       - key: DB_SSLMODE
         value: require
