@@ -5,8 +5,10 @@ RUN apt-get update \
       git \
       unzip \
       libpq-dev \
-      zip \
       libonig-dev \
+      libzip-dev \
+      pkg-config \
+      zip \
  && docker-php-ext-install \
       pdo \
       pdo_pgsql \
@@ -24,5 +26,4 @@ RUN composer install --no-dev --optimize-autoloader \
  && php artisan db:seed --force
 
 EXPOSE 10000
-
 CMD ["sh","-lc","php artisan serve --host=0.0.0.0 --port $PORT"]
