@@ -1,26 +1,30 @@
 services:
-  - type: web
-    name: waspito-backend
-    runtime: docker
-    dockerfilePath: Dockerfile
-    plan: free
-
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_KEY
-        generateValue: true
-      - key: DB_CONNECTION
-        value: pgsql
-      - key: DB_HOST
-        value: ep-muddy-surf-a2iarhs8-pooler.eu-central-1.aws.neon.tech
-      - key: DB_PORT
-        value: "5432"
-      - key: DB_DATABASE
-        value: neondb
-      - key: DB_USERNAME
-        value: neondb_owner
-      - key: DB_PASSWORD
-        value: npg_2QgdriWAPO9o
-      - key: DB_SSLMODE
-        value: require
+- type: web
+  name: waspito-backend
+  runtime: docker
+  repo: https://github.com/Messi002/waspito_backend
+  plan: free
+  envVars:
+  - key: DB_SSLMODE
+    sync: false
+  - key: DB_PASSWORD
+    sync: false
+  - key: DB_USERNAME
+    sync: false
+  - key: DB_DATABASE
+    sync: false
+  - key: DB_PORT
+    sync: false
+  - key: DB_HOST
+    sync: false
+  - key: DB_CONNECTION
+    sync: false
+  - key: APP_KEY
+    sync: false
+  - key: APP_ENV
+    sync: false
+  region: oregon
+  dockerContext: .
+  dockerfilePath: Dockerfile
+  autoDeployTrigger: commit
+version: "1"
